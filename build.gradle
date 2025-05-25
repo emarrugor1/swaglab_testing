@@ -14,11 +14,11 @@ targetCompatibility = 16
 
 ext {
     slf4jVersion = '1.7.7'
-    serenityCoreVersion = '4.1.12'
+    serenityCoreVersion = '4.2.26'
     junitVersion = '5.10.0'
     assertJVersion = '3.24.2'
     lombokVersion = '1.18.24'
-    logbackVersion = '1.2.11'
+    logbackVersion = '1.5.18'
 }
 
 dependencies {
