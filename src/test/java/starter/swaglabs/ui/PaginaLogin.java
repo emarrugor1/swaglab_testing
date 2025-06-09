@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 public class PaginaLogin extends PageObject {
 
     public static final Target CAMPO_USUARIO = Target.the("campo de usuario")
-            .located(By.id("username"));
+            .located(By.id("user-name"));
 
     public static final Target CAMPO_CONTRASENA = Target.the("campo de contraseña")
             .located(By.id("password"));
