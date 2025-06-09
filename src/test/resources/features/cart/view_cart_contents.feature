@@ -1,4 +1,5 @@
 # author: Oliver Cogollo, Maykel Rhenals
+
 # language: es
 
 @UI @Catalog @Cart
@@ -33,3 +34,4 @@ Característica: Ver productos en el carrito
     Entonces los productos en el carrito deben ser:
       | Sauce Labs Backpack      |
       | Sauce Labs Bike Light    |
+
