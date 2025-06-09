@@ -7,8 +7,15 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import starter.swaglabs.questions.ContadorCarrito;
 import starter.swaglabs.questions.ElBotonAgregarAlCarrito;
+import starter.swaglabs.questions.ElBotonDelProducto;
 import starter.swaglabs.questions.ProductosEnCarrito;
 import starter.swaglabs.tasks.*;
+
+import java.util.List;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.hamcrest.Matchers.equalTo;
+
 
 public class AgregarAlCarritoStepDefinitions {
 
@@ -88,5 +95,64 @@ public class AgregarAlCarritoStepDefinitions {
                 Ensure.that(ProductosEnCarrito.coincidenCon(dataTable.asList())).isTrue()
         );
     }
+
+    @Cuando("quita el producto {string} del carrito")
+    public void quitaElProductoDelCarrito(String producto) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                RemoverProductoEnCarrito.conNombre(producto)
+        );
+    }
+
+    @Cuando("navega al detalle del producto {string}")
+    public void navegaAlDetalle(String producto) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                IrAlDetalle.de(producto)
+        );
+    }
+
+    @Cuando("regresa al catálogo")
+    public void regresaAlCatalogo() {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                NavegarAlCatalogo.deLaTienda()
+        );
+    }
+
+    @Cuando("cierra la sesión")
+    public void cerrarSesion() {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                CerrarSesion.deLaAplicacion()
+        );
+    }
+
+    @Cuando("inicia sesión nuevamente")
+    public void iniciaSesionNuevamente() {
+        OnStage.theActorCalled("Usuario").attemptsTo(
+                IniciarSesion.comoUsuarioEstandar()
+        );
+    }
+
+    @Entonces("el carrito debe estar vacío")
+    public void carritoDebeEstarVacio() {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                Ensure.that(ContadorCarrito.estaOculto()).isTrue()
+        );
+    }
+
+    @Entonces("los botones deben decir REMOVE para:")
+    public void botonesDelCatalogoDebenDecir(io.cucumber.datatable.DataTable dataTable) {
+        // 1) Obtenemos los nombres de los productos que siguen en el carrito
+        List<String> productosEnCarrito = dataTable.asList();
+
+        // 2) Para cada uno, verificamos que su botón en el catálogo diga “Remove”
+        productosEnCarrito.forEach(nombreProducto ->
+                OnStage.theActorInTheSpotlight().should(
+                        seeThat(
+                                ElBotonDelProducto.tieneTexto(nombreProducto),
+                                equalTo("REMOVE")
+                        )
+                )
+        );
+    }
+
 }
 

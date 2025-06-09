@@ -9,7 +9,7 @@
   para seleccionar los productos que deseo comprar.
 
   @Successful
-  Escenario: CP-009-01 - Visualización del botón "Add to cart" en cada tarjeta de producto
+  Escenario: CP-009-00 - Visualización del botón "Add to cart" en cada tarjeta de producto
     Dado que el usuario ha iniciado sesión exitosamente
     Cuando navega al catálogo de productos
     Entonces cada producto listado debe mostrar un botón "Add to cart"

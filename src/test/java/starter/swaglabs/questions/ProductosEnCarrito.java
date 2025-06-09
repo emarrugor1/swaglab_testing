@@ -17,6 +17,13 @@ public class ProductosEnCarrito {
                     .map(WebElementFacade::getText)
                     .map(String::trim)
                     .collect(Collectors.toList());
+          
+
+            // Si la lista de esperados es nula o sólo contiene celdas vacías, esperamos carrito vacío
+            if (nombresEsperados == null
+                    || nombresEsperados.stream().allMatch(s -> s == null || s.trim().isEmpty())) {
+                return nombresEnCarrito.isEmpty();
+            }
 
             return nombresEnCarrito.containsAll(nombresEsperados) && nombresEsperados.containsAll(nombresEnCarrito);
         };
